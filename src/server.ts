@@ -1,11 +1,18 @@
 import { app } from "./app";
 import { knex } from "./database";
+const TABLE = 'CreateDailyDiets'
 
 
 app.get('/', async () => {
-  const tables = await knex('sqlite_schema').select('*')
+  const diets = await knex(TABLE).select('*').where('name', 'new')
+  // const diet = await knex(TABLE).insert({
+  //   id: crypto.randomUUID(),
+  //   name: 'new food',
+  //   description: 'new fod with bread',
+  //   isOnTheDiet: true
+  // }).returning('*')
 
-  return tables
+  return diets
 })
 app.listen({
   port: 3333
